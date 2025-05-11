@@ -1,0 +1,9 @@
+services:
+  syncdb:
+    container_name: syncdb
+    build: .docker/php
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    command: python3 main.py
