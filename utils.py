@@ -1,6 +1,6 @@
 import os
-import json
 from config import DUMP_DIR
+from bson import json_util
 
 
 def ensure_dump_dir():
@@ -9,9 +9,9 @@ def ensure_dump_dir():
 
 def save_collection(name, documents):
     with open(f"{DUMP_DIR}/{name}.json", "w", encoding="utf-8") as f:
-        json.dump(documents, f, indent=2, default=str)
+        f.write(json_util.dumps(documents, indent=2))
 
 
 def load_collection(name):
     with open(f"{DUMP_DIR}/{name}.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+        return json_util.loads(f.read())
